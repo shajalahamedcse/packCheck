@@ -17,10 +17,11 @@ urls.each do |key,url|
     threads << Thread.new do
         fullURL = pk.getFullURL(url, key, name)
         puts fullURL
-        response =Net::HTTP.get(URI.parse(fullURL))
-        
+
         puts "Request Complete: #{key}\n"
-        
+        uri = URI.parse(fullURL)
+        response = Net::HTTP.get_response(uri)
+        puts response.code
     end
 end
 
